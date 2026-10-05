@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoTrain Sheet Hub | Automated Training Reports</title>
+  
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+
+    body { 
+      background: radial-gradient(circle at 50% 30%, #3730a3 0%, #1e1b4b 60%, #0f172a 100%);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* Container Layar Splash */
+    .splash {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+    }
+
+    /* Icon Box Hub */
+    .brand-icon-wrapper {
+      position: relative;
+      width: 88px;
+      height: 88px;
+      background: #4f46e5;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 16px 36px -8px rgba(79, 70, 229, 0.5),
+                  0 0 20px rgba(129, 140, 248, 0.35);
+      margin-bottom: 1.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .brand-icon-wrapper svg {
+      width: 44px;
+      height: 44px;
+      fill: #ffffff;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+    }
+
+    /* Teks Judul & Subtitle */
+    .splash-title {
+      color: #ffffff;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-align: center;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+      line-height: 1.2;
+    }
+
+    .splash-title span {
+      color: #818cf8;
+    }
+
+    .splash-sub {
+      color: #c7d2fe;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      margin-top: 0.4rem;
+      opacity: 0.9;
+      text-align: center;
+      max-width: 90%;
+    }
+
+    /* Progress Loader */
+    .loader-container {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3.5px solid rgba(129, 140, 248, 0.2);
+      border-top-color: #818cf8;
+      border-right-color: #6366f1;
+      border-radius: 50%;
+      animation: spin 0.85s cubic-bezier(0.55, 0.25, 0.25, 0.7) infinite;
+    }
+
+    .loading-status {
+      font-size: 0.8rem;
+      color: #a5b4fc;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* Animasi */
+    @keyframes spin { 
+      to { transform: rotate(360deg); } 
+    }
+
+    @keyframes float { 
+      0%, 100% { transform: translateY(0px); } 
+      50% { transform: translateY(-6px); } 
+    }
+
+    /* Tampilan Iframe */
+    iframe {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Layar Splash Screen -->
+  <div class="splash" id="splash">
+    <!-- Icon Lightning Sesuai Dashboard -->
+    <div class="brand-icon-wrapper">
+      <svg viewBox="0 0 24 24">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+      </svg>
+    </div>
+
+    <!-- Teks Branding -->
+    <h1 class="splash-title">AutoTrain <span>Sheet Hub</span></h1>
+    <p class="splash-sub">Automated Session-Based Training Reports Generator</p>
+
+    <!-- Loading Indicator -->
+    <div class="loader-container">
+      <div class="spinner"></div>
+      <span class="loading-status">Memuat Portal...</span>
+    </div>
+  </div>
+
+  <!-- Google Apps Script / App Iframe -->
+  <iframe
+    id="appFrame"
+    src="https://script.google.com/macros/s/AKfycbzDJeLpN3lXCtGe_p64NoFtRYguMcdLg_HShJclAks7D1YxqoH8rEh3U78Nhwmo9gxTTw/exec"
+    allowfullscreen
+    onload="frameLoaded()">
+  </iframe>
+
+  <script>
+    function frameLoaded() {
+      const splash = document.getElementById("splash");
+      const appFrame = document.getElementById("appFrame");
+      
+      splash.style.opacity = "0";
+      setTimeout(() => {
+        splash.style.display = "none";
+        appFrame.style.display = "block";
+      }, 600);
+    }
+  </script>
+
+</body>
+</html>
